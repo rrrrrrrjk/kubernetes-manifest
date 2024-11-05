@@ -10,18 +10,10 @@ node {
                     // Configure Git user
                     sh "git config user.email 'ryw.jakkraphat@gmail.com'"
                     sh "git config user.name 'rrrrrrrjk'"
-                    
-                    // View the current rolling-update.yml content
-                    sh "cat update/rolling-update.yml"
-                    
-                    // Update the rolling-update.yml file with the new Docker tag
-                    sh "sed -i 's+rywj/jenkins-react.*+rywj/jenkins-react:${DOCKERTAG}+g' update/rolling-update.yml"
-                    
-                    // View the updated content
-                    sh "cat update/rolling-update.yml"
+                    sh "echo ${env.BUILD_NUMBER} > build_number.txt"
                     
                     // Commit and push changes using PAT
-                    sh "git add update/rolling-update.yml"
+                    sh "git add build_number.txt"
                     sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
                     sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/rrrrrrrjk/kubernetes-manifest.git HEAD:main"
                 }
