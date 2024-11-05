@@ -7,7 +7,6 @@ node {
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([string(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PAT')]) {
                         sh "git config user.email 'ryw.jakkraphat@gmail.com'"
                         sh "git config user.name 'rrrrrrrjk'"
                         sh "cd /update"
@@ -22,8 +21,7 @@ node {
                         // Commit and push changes using PAT
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_PAT}@github.com/${GIT_USERNAME}/kubernetes-manifest.git HEAD:main"
-                    }
+                        sh "git push https://github.com/rrrrrrrjk/kubernetes-manifest.git HEAD:main"
                 }
             }
 
