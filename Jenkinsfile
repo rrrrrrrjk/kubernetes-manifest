@@ -6,6 +6,7 @@ node {
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "git checkout main"
                     // Configure Git user
                     sh "git config user.email 'ryw.jakkraphat@gmail.com'"
                     sh "git config user.name 'rrrrrrrjk'"
