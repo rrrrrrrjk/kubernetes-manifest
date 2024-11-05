@@ -7,10 +7,10 @@ node {
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([string(credentialsId: 'github-token', variable: 'GIT_PAT')]) {
+                    withCredentials([string(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PAT')]) {
                         sh "git config user.email 'ryw.jakkraphat@gmail.com'"
                         sh "git config user.name 'rrrrrrrjk'"
-                        sh "update"
+                        sh "cd /update"
                         
                         // View the current rolling-update.yml content
                         sh "cat rolling-update.yml"
