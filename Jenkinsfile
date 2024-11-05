@@ -15,7 +15,9 @@ node {
                     // Commit and push changes using PAT
                     sh "git add build_number.txt"
                     sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                    sh "git push https://github.com/rrrrrrrjk/kubernetes-manifest.git HEAD:main"
+                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/rrrrrrrjk/kubernetes-manifest.git HEAD:main"
+                    }
                 }
             }
 
