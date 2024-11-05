@@ -1,6 +1,5 @@
 node {
     def app
-    def git-username = "rrrrrrrjk" 
     stage('Clone repository') {
       git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/rrrrrrrjk/kubernetes-manifest.git'
     }
@@ -15,9 +14,7 @@ node {
                     // Commit and push changes using PAT
                     sh "git add build_number.txt"
                     sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        sh "git push https://${git-username}:${GIT_PASSWORD}@github.com/rrrrrrrjk/kubernetes-manifest.git HEAD:main"
-                    }
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rrrrrrrjk/kubernetes-manifest.git']])
                 }
             }
 
