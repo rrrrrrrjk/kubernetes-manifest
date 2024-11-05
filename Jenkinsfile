@@ -9,7 +9,8 @@ node {
                     // Configure Git user
                     sh "git config user.email 'ryw.jakkraphat@gmail.com'"
                     sh "git config user.name 'rrrrrrrjk'"
-                    sh "echo ${env.BUILD_NUMBER} > build_number.txt"
+                    writeFile file: 'build_number.txt', text: 'Build number: ${env.BUILD_NUMBER}'
+
                     
                     // Commit and push changes using PAT
                     sh "git add build_number.txt"
