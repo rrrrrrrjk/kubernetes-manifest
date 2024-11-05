@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app
+  labels:
+    app: react
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: react
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: react
+    spec:
+      containers:
+      - name: react-app
+        image: rywj/jenkins-react
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

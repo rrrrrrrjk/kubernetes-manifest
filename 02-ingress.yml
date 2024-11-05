@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  labels:
+    name: ingress
+  namespace: react-project
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: react-service
+            port: 
+              number: 80
