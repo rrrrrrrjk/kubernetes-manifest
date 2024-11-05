@@ -1,8 +1,6 @@
 node {
     def app
-    environment {
-       git-username = "rrrrrrrjk" 
-    }
+    def git-username = "rrrrrrrjk" 
     stage('Clone repository') {
       git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/rrrrrrrjk/kubernetes-manifest.git'
     }
