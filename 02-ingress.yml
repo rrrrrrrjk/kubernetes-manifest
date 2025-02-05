@@ -7,9 +7,11 @@ metadata:
   namespace: react-project
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
 spec:
+  ingressClassName: nginx  
   rules:
-  - host: localhost
+  - host: 192.168.89.100  
     http:
       paths:
       - pathType: Prefix
