@@ -7,7 +7,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: react-project
+    name: react-app
   minReplicas: 3
   maxReplicas: 10
   metrics:
